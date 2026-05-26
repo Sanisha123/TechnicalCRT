@@ -197,23 +197,22 @@ Missing number
 Majority element
 
 Second Largest Element
-public class SecondLargest {
-    public static void main(String[] args) {
-        int[] arr = {12, 35, 1, 10, 34, 1};
-
-        int largest = Integer.MIN_VALUE;
-        int secondLargest = Integer.MIN_VALUE;
-
-        for (int num : arr) {
-            if (num > largest) {
+class Solution {
+    public int getSecondLargest(int[] arr) {
+        // code here
+        int n = arr.length;
+        int largest = -1;
+        int secondLargest = -1;
+        for(int i = 0; i < arr.length; i++){
+            if(arr[i] > largest){
                 secondLargest = largest;
-                largest = num;
-            } else if (num > secondLargest && num != largest) {
-                secondLargest = num;
+                largest = arr[i];
+            }
+            else if(arr[i]>secondLargest && arr[i]<largest){
+                secondLargest = arr[i];
             }
         }
-
-        System.out.println("Second Largest: " + secondLargest);
+        return secondLargest;
     }
 }
 
