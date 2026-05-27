@@ -217,88 +217,75 @@ class Solution {
 }
 
 Remove Duplicates from Sorted Array
-import java.util.*;
-
-public class RemoveDuplicates {
-    public static void main(String[] args) {
-        int[] arr = {1, 1, 2, 2, 3, 4, 4};
-
-        int index = 0;
-
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i] != arr[index]) {
-                index++;
-                arr[index] = arr[i];
+class Solution {
+    ArrayList<Integer> removeDuplicates(int[] arr) {
+        // code here
+        int n = arr.length;
+        ArrayList<Integer> ans = new ArrayList<>();
+        if(n == 0){
+            return ans;
+        }
+        ans.add(arr[0]);
+        for(int i = 1; i < n; i++){
+            if(arr[i] != arr[i-1]){
+                ans.add(arr[i]);
             }
         }
-
-        for (int i = 0; i <= index; i++) {
-            System.out.print(arr[i] + " ");
-        }
+        return ans;
     }
 }
 
 Two Sum
 import java.util.*;
 
-public class TwoSum {
-    public static void main(String[] args) {
-        int[] arr = {2, 7, 11, 15};
-        int target = 9;
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+       int l = 0, r = nums.length - 1;
+       while(l < r){
+        int sum = nums[l] + nums[r];
+        if(sum == target)
+            return new int[] {l,r};
 
-        HashMap<Integer, Integer> map = new HashMap<>();
-
-        for (int i = 0; i < arr.length; i++) {
-            int diff = target - arr[i];
-
-            if (map.containsKey(diff)) {
-                System.out.println(map.get(diff) + " " + i);
-            }
-
-            map.put(arr[i], i);
-        }
+        else if(sum < target)
+           l++;
+        else
+           r--;
+       }
+       return new int[] {};
     }
 }
 
 Missing Number
-public class MissingNumber {
-    public static void main(String[] args) {
-        int[] arr = {1, 2, 4, 5};
-
-        int n = 5;
-
-        int total = n * (n + 1) / 2;
-
-        int sum = 0;
-
-        for (int num : arr) {
-            sum += num;
+class Solution {
+    public int missingNumber(int[] nums) {
+        Arrays.sort(nums);
+        for(int i=0; i<nums.length; i++){
+           if(nums[i]!= i){
+            return i;
+           }
         }
-
-        System.out.println("Missing Number: " + (total - sum));
+        return nums.length;
     }
-}
 
 Majority Element
-public class MajorityElement {
-    public static void main(String[] args) {
-        int[] arr = {2, 2, 1, 1, 1, 2, 2};
-
+class Solution {
+    public int majorityElement(int[] nums) {
         int count = 0;
         int candidate = 0;
-
-        for (int num : arr) {
-            if (count == 0) {
+        for(int num : nums){
+            if(count == 0){
                 candidate = num;
             }
 
-            if (num == candidate) {
+            if(num == candidate){
                 count++;
-            } else {
+            }
+
+            else{
                 count--;
             }
         }
-
-        System.out.println("Majority Element: " + candidate);
+        return candidate;
     }
 }
+
